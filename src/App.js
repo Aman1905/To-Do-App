@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import List from './List'
 
 const App = () => {
 
@@ -16,6 +17,15 @@ const App = () => {
     setInputList("");
   }
 
+  const deleteItems = (id) => {
+    setItems((oldItems) => {
+      return oldItems.filter((arrElem, index) => {
+        return index !== id;
+      })
+    })
+  }
+
+
   return (
     <div className="main_div">
       <div className="center_div">
@@ -27,8 +37,8 @@ const App = () => {
 
         <ol>
 
-          {Items.map( (itemval) => {
-            return <li> {itemval} </li>
+          {Items.map( (itemval, index) => {
+            return <List key={index} id={index} text={itemval} onSelect={deleteItems} /> 
           })}
 
         </ol>
